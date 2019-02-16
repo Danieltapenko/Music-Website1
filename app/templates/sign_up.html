@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="post">
+    {{ form.hidden_tag() }}
+    {% if current_user.is_anonymous %}
+        <H1>Already a registered user?</H1>
+    <font size="5>"<b><a href="{{ url_for('login') }}">Login!</a></b></font>
+    {% endif %}
+    <p>
+        {{ form.username.label }}<br>
+        {{ form.username(size=32) }}<br>
+    </p>
+    <p>
+        {{ form.email.label }}<br>
+        {{ form.email(size=64) }}<br>
+    </p>
+    <p><u>Would you want to use this email to receive newsletters?</u>
+        <br>
+        {{ form.checkbox() }}</p>
+    <p>{{ form.submit.label }} {{ form.submit }}</p>
+</form>
+
+{% endblock %}

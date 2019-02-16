@@ -1,0 +1,22 @@
+<div id="popup1" class="overlay">
+    	<div class="popup">
+            <h2>
+            <img src="{{ current_user.avatar() }}" style="width:40px;height:40px;">Here i am</h2>
+            <hr>
+		    <a class="close" href="#">&times;</a>
+
+		    <div class="content">
+
+                {% if current_user.is_authenticated %}
+
+                <h5>Hello, {{ current_user.username }}</h5>
+                   <% a = Post.query.order_by(Post.topic_id.desc()).all() %>
+#I want to query all the posts in the column of the database that have a specific topic_id(a number that decides which posts go to what topic, because there are many posts in the posts column of the database, but certain ones appear for different topics), and for now, Dmitri suggested that I try to just show ALL the posts, but I am having trouble with that too. I looked it up and people are saying that <% allow me to put python script into html, but html reads it as text too.
+                <hr>
+
+                <form action="" method="post">
+                 {{ form.hidden_tag() }}
+                {{ form.post.label }}<br>
+                {{ form.post(cols=32, rows=2) }}<br>
+                </p>
+        <p>{{ form.submit() }}</p>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends "base.html" %}
+{% block content %}
+<form method="post">
+    {{ form.hidden_tag() }}
+    <a href="{{ url_for('signup') }}">Sign up</a>
+    <br><br>
+    <a href="{{ url_for('home') }}">Home</a>
+    <p>
+        {{ form.username.label }}<br>
+        {{ form.username(size=32) }}<br>
+    </p>
+    <p>
+        {{ form.email.label }}<br>
+        {{ form.email(size=64) }}<br>
+    </p>
+    <p>{{ form.submit }}</p>
+</form>
+
+{% endblock %}
+</body>
+</html>

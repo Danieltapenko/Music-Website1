@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body style="background-color:gray;">
+
+
+    <table>
+        <tr valign="top">
+            <td><p>User: {{ current_user.username }}</p></td>
+        </tr>
+    </table>
+    {% for post in posts %}
+        {% include '_post.html' %}
+    {% endfor %}
+<hr>
+
+<form action="" method="post">
+  {{ form.hidden_tag() }}
+  {{ form.post.label }}<br>
+  {{ form.post(cols=32, rows=2) }}<br>
+  <p>{{ form.submit() }}</p>
+  <br><br><br><br>
+</form>
+</>
+</html>
