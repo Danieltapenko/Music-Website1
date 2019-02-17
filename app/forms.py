@@ -19,5 +19,5 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login!')
 
 class BlogForm(FlaskForm):
-    post = TextAreaField('Say a post please I need it', validators=[Length(min=4,max=160)])
-    submit = SubmitField('Submit')
+    post = TextAreaField('Say a post!', validators=[Length(min=4,max=160)])
+    submit = SubmitField('Submit',validators=LoginRequired())

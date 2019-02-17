@@ -25,9 +25,10 @@ def signup():
         return redirect(url_for('home'))
     form = SignupForm()
     if form.validate_on_submit():
+      #  print(form.username.data,form.email.data)
         user = User(username=form.username.data, email=form.email.data)
         db.session.add(user)
-        db.session.flush()
+        db.session.commit()
         login_user(user)
         return redirect(url_for('home'))
     return render_template('sign_up.html',form=form)
@@ -68,13 +69,10 @@ def shop():
     #db.session.commit()
     posts = Post.query.all()
     if form.validate_on_submit():
-      #  print(current_user)
-        post = Post(body=form.post.data, author=current_user)#.username)
-        posts = Post.query.all()
-        for p in posts:
-            print(p.author.username)
-        db.session.add(post)
-        db.session.commit()
+        if current_user.is_authenticated:
+            post = Post(body=form.post.data, author=current_user)
+            db.session.add(post)
+            db.session.commit()
      #   a = Post.query.order_by(Post.topic_id.desc()).all()
     #    for updated in a:
       #      b = str(updated)
@@ -82,7 +80,9 @@ def shop():
         #        print("this means it doesn;t work kinda idk")
          #       updated_list.append(updated)
       #  flash('Your post is now live!')
-        return redirect(url_for('shop'))
+            return redirect(url_for('shop'))
+        else:
+            return redirect(url_for('signup'))
     return render_template('shop.html', form=form, posts=posts)
 
 @website.route('/songs')
@@ -95,10 +95,10 @@ def songs():
 @website.route('/fan_message')
 @website.route('/fan_message',methods=['GET','POST'])
 def fan_message():
-    form=BlogForm()
-    topics = Post(topic_id=0)
-    db.session.add(topics)
-    db.session.flush()
+    #form=BlogForm()
+    #topics = Post(topic_id=0)
+    #db.session.add(topics)
+   # db.session.flush()
    # a = Post.query.order_by(Post.topic_id.desc()).all()
   #  for updated in a:
     #    b = str(updated)
@@ -111,7 +111,7 @@ def fan_message():
  #       db.session.flush()
     #    flash('Your post is now live!')
    #     return redirect(url_for('iframe_popup'))
-    return render_template('fan_message.html',form=form)
+    return render_template('fan_message.html')#,form=form)
 
 
 @website.route('/tour')
